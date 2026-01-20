@@ -1,0 +1,54 @@
+Project Notes:
+(a plain text file for brainstorming project features and functionality without Copilot suggestions)
+
+---
+
+income module:
+    - calculate annual gross income
+    - calculate annual net income
+    - calculate required income (based on expenses)
+    - translate hourly to salary/salary to hourly
+
+---
+
+expenses module:
+    - list common expenses
+    - calculate monthly expenses
+
+---
+
+taxes module:
+    - calculate taxable income
+    - calculate taxes (using tax brackets)
+
+---
+
+deductions module:
+    - list common deductions
+    - calculate pre-tax deductions
+    - calculate post-tax deductions
+
+---
+
+hours module:
+    - calculate ???
+
+---
+
+utils module:
+    - constants
+    - formatting
+    - tax brackets
+    - tax types
+
+
+
+---
+
+lib:
+
+
+
+
+
+

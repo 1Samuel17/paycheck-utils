@@ -1,3 +1,8 @@
+/// Module for handling income calculations
+/// This module provides structures and functions to calculate gross income based on hourly wage or salary,
+/// including considerations for overtime and paid time off.
+/// It also includes utility functions to convert between hourly rates and annual salaries.
+
 use crate::utils::{WEEKS_PER_YEAR, STANDARD_HOURS_PER_WEEK, OVERTIME_MULTIPLIER, PAID_TIME_OFF_WEEKS_PER_YEAR};
 
 
@@ -8,7 +13,7 @@ pub enum IncomeType {
 pub struct Income {
     pub income_type: IncomeType,
     pub hours_per_week: Option<u32>, // only relevant for hourly income
-    pub estimated_overtime_hours_per_week: Option<u32>, // only relevant for hourly income
+    pub overtime_hours_per_week: Option<u32>, // only relevant for hourly income
 }
 
 impl Income {
@@ -17,7 +22,7 @@ impl Income {
             IncomeType::Salary(salary) => salary as f32,
             IncomeType::Hourly(rate) => {
                 let hours = self.hours_per_week.unwrap_or(STANDARD_HOURS_PER_WEEK);
-                let overtime_hours = self.estimated_overtime_hours_per_week.unwrap_or(0);
+                let overtime_hours = self.overtime_hours_per_week.unwrap_or(0);
                 let regular_income = rate as f32 * hours as f32 * WEEKS_PER_YEAR as f32;
                 let overtime_income = rate as f32 * OVERTIME_MULTIPLIER * overtime_hours as f32 * (WEEKS_PER_YEAR - PAID_TIME_OFF_WEEKS_PER_YEAR) as f32;
                 regular_income + overtime_income
@@ -44,7 +49,7 @@ mod tests {
         let income = Income {
             income_type: IncomeType::Hourly(20),
             hours_per_week: Some(40),
-            estimated_overtime_hours_per_week: Some(5),
+            overtime_hours_per_week: Some(5),
         };
         let gross_income = income.gross_annual_income();
         assert_eq!(gross_income, 20.0 * 40.0 * 52.0 + 20.0 * 1.5 * 5.0 * 49.0);
@@ -55,7 +60,7 @@ mod tests {
         let income = Income {
             income_type: IncomeType::Salary(60000),
             hours_per_week: None,
-            estimated_overtime_hours_per_week: None,
+            overtime_hours_per_week: None,
         };
         let gross_income = income.gross_annual_income();
         assert_eq!(gross_income, 60000.0);
