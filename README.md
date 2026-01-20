@@ -50,10 +50,7 @@ I chose to create a library that was personally relevant and useful to me -- spe
 ---
 
 ####  * A Note on Copilot usage *
-```
+
 Copilot is being used but not blindly. In some cases, depending on the task, Copilot is paused entirely to allow me time to try to come up with a solution on my own. But for the sake of speed, Copilot suggestions are reviewed and a determination is made as to whether the assistance is exactly relevant, needing revision, or completely not applicable to project goals. If Copilot suggests advanced code techniques that are beyond my current understanding of Rust, I DO NOT implement it! Instead I make a note of the suggestion to do research at a later time to grow in my knowledge and proficiency of the language.
-
-```
-
 
 > ### See the Documentation
