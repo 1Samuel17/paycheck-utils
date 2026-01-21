@@ -3,80 +3,89 @@
 /// including considerations for overtime and paid time off.
 /// It also includes utility functions to convert between hourly rates and annual salaries.
 
-use crate::utils::{WEEKS_PER_YEAR, STANDARD_HOURS_PER_WEEK, OVERTIME_MULTIPLIER, PAID_TIME_OFF_WEEKS_PER_YEAR};
+use crate::utils::{OVERTIME_MULTIPLIER, PAY_PERIOD, STANDARD_HOURS_PER_PAY_PERIOD, WEEKS_PER_YEAR};
 
 
 pub enum IncomeType {
-    Hourly (u32), // hourly rate
+    Hourly (f32), // hourly rate
     Salary (u32) // annual salary
 }
 pub struct Income {
     pub income_type: IncomeType,
-    pub hours_per_week: Option<u32>, // only relevant for hourly income
-    pub overtime_hours_per_week: Option<u32>, // only relevant for hourly income
+    pub hours_per_pay_period: Option<u32>, // only relevant for hourly income
+
 }
 
 impl Income {
-    pub fn gross_annual_income(&self) -> f32 {
+    // per pay period
+    pub fn income_per_pay_period(&self) -> f32 {
         match self.income_type {
-            IncomeType::Salary(salary) => salary as f32,
+            IncomeType::Salary(salary) => {
+                (salary / WEEKS_PER_YEAR * PAY_PERIOD) as f32
+            },
             IncomeType::Hourly(rate) => {
-                let hours = self.hours_per_week.unwrap_or(STANDARD_HOURS_PER_WEEK);
-                let overtime_hours = self.overtime_hours_per_week.unwrap_or(0);
-                let regular_income = rate as f32 * hours as f32 * WEEKS_PER_YEAR as f32;
-                let overtime_income = rate as f32 * OVERTIME_MULTIPLIER * overtime_hours as f32 * (WEEKS_PER_YEAR - PAID_TIME_OFF_WEEKS_PER_YEAR) as f32;
-                regular_income + overtime_income
+                let regular_hours = 
+                    if self.hours_per_pay_period.unwrap() > STANDARD_HOURS_PER_PAY_PERIOD {STANDARD_HOURS_PER_PAY_PERIOD as f32}
+                    else {self.hours_per_pay_period.unwrap() as f32};
+                let overtime_hours = 
+                    if self.hours_per_pay_period.unwrap() > STANDARD_HOURS_PER_PAY_PERIOD {self.hours_per_pay_period.unwrap() - STANDARD_HOURS_PER_PAY_PERIOD}
+                    else {0};
+                (regular_hours * rate) + (overtime_hours as f32 * rate * OVERTIME_MULTIPLIER) as f32
+            },
+        }
+    }
+
+    // per month
+    pub fn income_per_month(&self) -> f32 {
+        match self.income_type {
+            IncomeType::Salary(salary) => {(salary / 12) as f32},
+            IncomeType::Hourly(rate) => {
+                let regular_hours = 
+                    if self.hours_per_pay_period.unwrap() > STANDARD_HOURS_PER_PAY_PERIOD {STANDARD_HOURS_PER_PAY_PERIOD as f32}
+                    else {self.hours_per_pay_period.unwrap() as f32};
+                let overtime_hours = 
+                    if self.hours_per_pay_period.unwrap() > STANDARD_HOURS_PER_PAY_PERIOD {self.hours_per_pay_period.unwrap() - STANDARD_HOURS_PER_PAY_PERIOD}
+                    else {0};
+                (regular_hours * rate) + (overtime_hours as f32 * rate * OVERTIME_MULTIPLIER) * 2 as f32
             }
         }
     }
 
-    pub fn salary_to_hourly(salary: u32) -> f32 {
-        salary as f32 / (WEEKS_PER_YEAR as f32 * STANDARD_HOURS_PER_WEEK as f32)
-    }
 
-    pub fn hourly_to_salary(hourly_rate: u32) -> f32 {
-        hourly_rate as f32 * WEEKS_PER_YEAR as f32 * STANDARD_HOURS_PER_WEEK as f32
-    }
+    // per year
+
 
 
 
 }
 
+
+// Quick tests while developing
 #[cfg(test)]
 mod tests {
     use super::*;
     #[test]
-    fn test_gross_annual_income_hourly() {
+    fn test_income_per_pay_period_salary() {
         let income = Income {
-            income_type: IncomeType::Hourly(20),
-            hours_per_week: Some(40),
-            overtime_hours_per_week: Some(5),
+            income_type: IncomeType::Salary(52000),
+            hours_per_pay_period: None,
         };
-        let gross_income = income.gross_annual_income();
-        assert_eq!(gross_income, 20.0 * 40.0 * 52.0 + 20.0 * 1.5 * 5.0 * 49.0);
+        assert_eq!(income.income_per_pay_period(), 2000.0);
     }
-
     #[test]
-    fn test_gross_annual_income_salary() {
+    fn test_income_per_pay_period_hourly_no_overtime() {
         let income = Income {
-            income_type: IncomeType::Salary(60000),
-            hours_per_week: None,
-            overtime_hours_per_week: None,
+            income_type: IncomeType::Hourly(20.0),
+            hours_per_pay_period: Some(80),
         };
-        let gross_income = income.gross_annual_income();
-        assert_eq!(gross_income, 60000.0);
+        assert_eq!(income.income_per_pay_period(), 1600.0);
     }
-
     #[test]
-    fn test_salary_to_hourly() {
-        let hourly_rate = Income::salary_to_hourly(52000);
-        assert_eq!(hourly_rate, 25.0);
+    fn test_income_per_pay_period_hourly_with_overtime() {
+        let income = Income {
+            income_type: IncomeType::Hourly(20.0),
+            hours_per_pay_period: Some(90),
+        };
+        assert_eq!(income.income_per_pay_period(), 1900.0);
     }
-
-    #[test]
-    fn test_hourly_to_salary() {
-        let salary = Income::hourly_to_salary(25);
-        assert_eq!(salary, 52000.0);
-    }
-
 }
