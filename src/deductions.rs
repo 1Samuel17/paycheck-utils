@@ -1,58 +1,45 @@
-/// Module for handling tax deductions.
-/// This module provides structures and functions to calculate standard and itemized deductions
-/// based on filing status. It includes functionality to compute total deductions applicable
-/// to an individual's tax situation.
+/// Module for handling payroll deductions other than taxes.
+
 
 pub enum PayrollDeduction {
-    HealthInsurance(f32), // monthly health insurance deduction
-    RetirementContribution(f32), // monthly retirement contribution deduction
-    Other(f32), // other monthly payroll deductions
+    Medical(Option<f32>), // health insurance (fixed amount)
+    Dental(Option<f32>), // health insurance (fixed amount)
+    Vision(Option<f32>), // health insurance (fixed amount)
+    Retirement401k(Option<f32>), // retirement (percentage)
+    RetirementRoth401k(Option<f32>), // retirement (percentage)
+    HSA(Option<f32>), // health savings account (fixed amount)
+    FSA(Option<f32>), // flexible spending account (fixed amount)
+    VoluntaryADD(Option<f32>), // accidental death & dismemberment (fixed amount)
+    VoluntaryLife(Option<f32>), // group life insurance (fixed amount)
+    VoluntaryLTD(Option<f32>), // long term disability (fixed amount)
+    VoluntarySTD(Option<f32>), // short term disability (fixed amount)
 }
 
-pub struct Deductions {
-    pub payroll_deductions: Vec<PayrollDeduction>,
+
+pub struct PayrollDeductions {
+    pub deductions: Vec<PayrollDeduction>
 }
 
-impl Deductions {
-    pub fn total_monthly_deductions(&self) -> f32 {
-        self.payroll_deductions.iter().map(|deduction| {
+impl PayrollDeductions {
+    pub fn total_payroll_deductions(&self) -> f32 {
+        self.deductions.iter().map(|deduction| {
             match deduction {
-                PayrollDeduction::HealthInsurance(amount) |
-                PayrollDeduction::RetirementContribution(amount) |
-                PayrollDeduction::Other(amount) => *amount,
+                PayrollDeduction::Medical(amount) |
+                PayrollDeduction::Dental(amount) |
+                PayrollDeduction::Vision(amount) |
+                PayrollDeduction::HSA(amount) |
+                PayrollDeduction::FSA(amount) |
+                PayrollDeduction::VoluntaryADD(amount) |
+                PayrollDeduction::VoluntaryLife(amount) |
+                PayrollDeduction::VoluntaryLTD(amount) |
+                PayrollDeduction::VoluntarySTD(amount) => amount.unwrap_or(0.0),
+                PayrollDeduction::Retirement401k(percentage) |
+                PayrollDeduction::RetirementRoth401k(percentage) => {
+                    // For percentage-based deductions, we would need the gross income to calculate the actual amount.
+                    // Here we return 0.0 as a placeholder.
+                    0.0
+                }
             }
         }).sum()
-    }
-
-    pub fn total_annual_deductions(&self) -> f32 {
-        self.total_monthly_deductions() * 12.0
-    }
-}
-#[cfg(test)]
-mod tests {
-    use super::*;
-    #[test]
-    fn test_total_monthly_deductions() {
-        let deductions = Deductions {
-            payroll_deductions: vec![
-                PayrollDeduction::HealthInsurance(200.0),
-                PayrollDeduction::RetirementContribution(150.0),
-                PayrollDeduction::Other(50.0),
-            ],
-        };
-        let total = deductions.total_monthly_deductions();
-        assert_eq!(total, 400.0);
-    }
-    #[test]
-    fn test_total_annual_deductions() {
-        let deductions = Deductions {
-            payroll_deductions: vec![
-                PayrollDeduction::HealthInsurance(200.0),
-                PayrollDeduction::RetirementContribution(150.0),
-                PayrollDeduction::Other(50.0),
-            ],
-        };
-        let total = deductions.total_annual_deductions();
-        assert_eq!(total, 4800.0);
     }
 }

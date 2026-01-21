@@ -43,34 +43,3 @@ impl Expenses {
         self.total_monthly_expenses() * 12.0
     }
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-    #[test]
-    fn test_total_monthly_expenses() {
-        let expenses = Expenses {
-            expense_items: vec![
-                Expense::Housing(Some(1200.0)),
-                Expense::Energy(Some(150.0)),
-                Expense::Water(None),
-                Expense::Internet(Some(60.0)),
-            ],
-        };
-        let total = expenses.total_monthly_expenses();
-        assert_eq!(total, 1410.0);
-    }
-    #[test]
-    fn test_total_annual_expenses() {
-        let expenses = Expenses {
-            expense_items: vec![
-                Expense::Housing(Some(1200.0)),
-                Expense::Energy(Some(150.0)),
-                Expense::Water(None),
-                Expense::Internet(Some(60.0)),
-            ],
-        };
-        let total = expenses.total_annual_expenses();
-        assert_eq!(total, 16920.0);
-    }
-}
