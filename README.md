@@ -9,9 +9,9 @@
 
 > ### External Lab: Create a Rust library
 
-    In this lab, you will create a library in Rust to reinforce the concepts covered in the last lesson. You can choose one of the following library ideas, or you are free to create one on your own. You will add code to the lib.rs file, document your code, and utilize tools like Makefile and Cargo. The end result will be a GitHub repository containing the complete code for your chosen library.
+In this lab, you will create a library in Rust to reinforce the concepts covered in the last lesson. You can choose one of the following library ideas, or you are free to create one on your own. You will add code to the lib.rs file, document your code, and utilize tools like Makefile and Cargo. The end result will be a GitHub repository containing the complete code for your chosen library.
 
-    Learning Objectives:
+Learning Objectives:
 
     - Gain experience in creating a library and organizing code in Rust.
 
@@ -21,15 +21,16 @@
 
     - Explore public and private modules in Rust and define appropriate access levels for functions.
 
-    Steps:
+Steps:
 
-    1. Create a new repository in your account for your Rust library project. You can also use the Rust template repository to quickly generate the scaffolding for your project in your own account.
+    1. Create a new repository in your account for your Rust library project. 
+    (You can also use the Rust template repository to quickly generate the scaffolding for your project in your own account.)
 
     2. Use the example code used for this week as a starting point
 
     3. Use one of the library ideas below or implement one from your own
 
-    Bonus: Try publishing your documented library to crates.io so that you can share it with others as a crate.
+Bonus: Try publishing your documented library to crates.io so that you can share it with others as a crate.
 
 ---
 
@@ -51,6 +52,6 @@ I chose to create a library that was personally relevant and useful to me -- spe
 
 ####  * A Note on Copilot usage *
 
-Copilot is being used but not blindly. In some cases, depending on the task, Copilot is paused entirely to allow me time to try to come up with a solution on my own. But for the sake of speed, Copilot suggestions are reviewed and a determination is made as to whether the assistance is exactly relevant, needing revision, or completely not applicable to project goals. If Copilot suggests advanced code techniques that are beyond my current understanding of Rust, I DO NOT implement it! Instead I make a note of the suggestion to do research at a later time to grow in my knowledge and proficiency of the language.
+Copilot is initially paused for a duration of 30 mins when I first begin a task to allow me time to think through the solution on my own and try to implement the ideas and features I have in mind. If I cannot seem to come up with a solution in 30 mins, I begin to allow Copilot offer suggestions and then determine if it fits what I am trying to accomplish. If I do not understand the code offered by Copilot, I ask for an explanation of what it's doing. Copilot does not always know what I am trying to do. For example, the modules and key words I have used in this library make Copilot think I am trying to create a library for filing taxes at tax season, but the library is intended to help calculate payroll taxes, deductions, and income/expenses -- not federal income taxes, deductions and income/expenses as filed during tax season.
 
 > ### See the Documentation
