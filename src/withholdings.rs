@@ -1,6 +1,8 @@
 // module for handling estimated federal paycheck withholdings using the method outlined by the IRS in Publication 15T (2026) (percentage method)
 
 use crate::utils::*;
+use crate::income::*;
+
 
 
 // 1. annualize bi-weekly paycheck

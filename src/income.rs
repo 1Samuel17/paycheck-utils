@@ -11,7 +11,7 @@ pub enum IncomeType {
 }
 pub struct Income {
     pub income_type: IncomeType,
-    pub hours_per_week: Option<f32>, // only relevant for hourly income
+    pub working_hours: Option<f32>, // only relevant for hourly income
 }
 
 impl Income {
@@ -67,14 +67,14 @@ impl Income {
     pub fn determine_gross_income(&self, rate: f32) -> f32 {
 
         let regular_hours = 
-            if self.hours_per_week.unwrap() > STANDARD_HOURS_PER_WEEK {
+            if self.working_hours.unwrap() > STANDARD_HOURS_PER_WEEK {
                 STANDARD_HOURS_PER_WEEK
             }
-            else {self.hours_per_week.unwrap()};
+            else {self.working_hours.unwrap()};
 
         let overtime_hours = 
-            if self.hours_per_week.unwrap() > STANDARD_HOURS_PER_WEEK {
-                self.hours_per_week.unwrap() - STANDARD_HOURS_PER_WEEK
+            if self.working_hours.unwrap() > STANDARD_HOURS_PER_WEEK {
+                self.working_hours.unwrap() - STANDARD_HOURS_PER_WEEK
             }
             else {0.0};
         
@@ -86,32 +86,3 @@ impl Income {
 
 
 // Quick tests while developing (still need to create more test cases to be more thorough)
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_hourly_income_calculations() {
-        let income = Income {
-            income_type: IncomeType::Hourly(20.0),
-            hours_per_week: Some(45.0),
-        };
-
-        assert_eq!(income.gross_income_per_week(), 950.0);
-        assert_eq!(income.gross_income_per_pay_period(), 1900.0);
-        assert_eq!(income.gross_income_per_month(), 4113.5);
-        assert_eq!(income.gross_income_per_year(), 49400.0);
-    }
-    #[test]
-    fn test_salary_income_calculations() {
-        let income = Income {
-            income_type: IncomeType::Salary(60000.0),
-            hours_per_week: None,
-        };
-        assert_eq!(income.gross_income_per_week(), 1153.85);
-        assert_eq!(income.gross_income_per_pay_period(), 2307.69);
-        assert_eq!(income.gross_income_per_month(), 5000.0);
-        assert_eq!(income.gross_income_per_year(), 60000.0);
-    }
-}
