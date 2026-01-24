@@ -3,6 +3,7 @@
 
 // time related constants
 pub const WEEKS_PER_YEAR: f32 = 52.0; // potential working weeks in a year
+pub const WEEKS_PER_MONTH: f32 = 4.33; // average weeks in a month
 pub const PAY_PERIODS_PER_YEAR: f32 = 26.0; // bi-weekly pay periods in a year
 pub const MONTHS_PER_YEAR: f32 = 12.0; // months in a year
 pub const STANDARD_HOURS_PER_WEEK: f32 = 40.0; // standard full-time hours per week
