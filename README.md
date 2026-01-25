@@ -36,22 +36,18 @@ Bonus: Try publishing your documented library to crates.io so that you can share
 
 > ### Project Purpose
 
-I chose to create a library that was personally relevant and useful to me -- specifically, a library that contains utility functions for calculating net income, necessary hours, elected deductions, and standard tax withholding given a hypothetical set of expenses and a hypothetical hourly wage or salary scenario. The idea is pretty much like the "Sample Paycheck" tool found in the [Paycom](https://www.paycom.com/software/employee-self-service/) employee portal, but aimed at having more functionality and customization.
+I chose to create a library that was personally relevant and useful to me -- specifically, a library that contains utility functions for estimating paycheck withholdings and net income in order to compare against a given set of living expenses. The idea is similar to the "Sample Paycheck" tool found in the [Paycom](https://www.paycom.com/software/employee-self-service/) employee portal, but aimed at having a little more flexibility.
 
 ---
 
 #### Example Calculations:
 
-- Given a list of monthly expenses, how much should be earned hourly @ 40hrs/week (no overtime) to cover those expenses with at least $500 left for the month (not accounting for taxes)
-
-- Given a list of monthly expenses, how much should be earned hourly @ 40hrs/week (no overtime) to cover those expenses with at least $500 left for the month (accounting for standard tax withholding)
-
-- Given a gross annual salary and a list of elected deductions, what would the net income be after taxes and deductions?
+- Given a list of monthly expenses and a list of elected payroll deductions, if I work [n] hours per week at a rate of [m] dollars per hour, would my net monthly income be enough to cover the expenses with at least $500 left over.
 
 ---
 
 ####  * A Note on Copilot usage *
 
-Copilot is initially paused for a duration of 30 mins when I first begin a task to allow me time to think through the solution on my own and try to implement the ideas and features I have in mind. If I cannot seem to come up with a solution in 30 mins, I begin to allow Copilot offer suggestions and then determine if it fits what I am trying to accomplish. If I do not understand the code offered by Copilot, I ask for an explanation of what it's doing. Copilot does not always know what I am trying to do. For example, the modules and key words I have used in this library make Copilot think I am trying to create a library for filing taxes at tax season, but the library is intended to help calculate payroll taxes, deductions, and income/expenses -- not federal income taxes, deductions and income/expenses as filed during tax season.
+Copilot is initially paused for a duration of 30 mins when I first begin a task to allow me time to think through the solution on my own and try to implement the ideas and features I have in mind. If I cannot seem to come up with a solution in 30 mins, I begin to allow Copilot to offer suggestions and then determine if it fits what I am trying to accomplish. If I do not understand the code offered by Copilot, I ask for an explanation of what it's doing. Copilot does not always know what I am trying to do. For example, the modules and key words I have used in this library make Copilot think I am trying to create a library for filing taxes at tax season, but the library is intended to help calculate payroll taxes, deductions, and income/expenses -- not federal income taxes, deductions and income/expenses as filed during tax season.
 
 > ### See the Documentation
