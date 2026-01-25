@@ -6,7 +6,7 @@ use crate::utils::*;
 
 // per paycheck
 
-fn determine_gross_paycheck(rate: f32, hours_per_week: f32) -> f32 {
+pub fn determine_gross_paycheck(rate: f32, hours_per_week: f32) -> f32 {
 
     let regular_hours = 
         if hours_per_week > STANDARD_HOURS_PER_WEEK {

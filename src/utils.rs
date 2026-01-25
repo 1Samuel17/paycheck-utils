@@ -17,28 +17,28 @@ pub const OVERTIME_MULTIPLIER: f32 = 1.5; // time and a half
 pub enum FilingStatus {
     Single (f32), 
     MarriedFilingJointly (f32),
-    MarriedFilingSeparately (f32),
+    MarriedFilingSeparate (f32),
     HeadOfHousehold (f32),
 }
 
 // 2026 standard deductions
-pub const SINGLE: f32 = 16100.00;
-pub const HEAD_OF_HOUSEHOLD: f32 = 24150.00;
-pub const MARRIED_FILING_JOINTLY: f32 = 32200.00;
-pub const MARRIED_FILING_SEPERATE: f32 = 16100.00;
+pub const SINGLE_DEDUCTION: f32 = 16100.00;
+pub const HEAD_OF_HOUSEHOLD_DEDUCTION: f32 = 24150.00;
+pub const MARRIED_FILING_JOINTLY_DEDUCTION: f32 = 32200.00;
+pub const MARRIED_FILING_SEPERATE_DEDUCTION: f32 = 16100.00;
 
 // 2026 payroll withholding constants
 pub const SOCIAL_SECURITY: f32 = 6.2; // percentage
 pub const MEDICARE: f32 = 1.45; // percentage
 
 // 2026 tax brackets for federal withholdings
-pub const BRACKET_1: f32 = 0.10; // 10%
-pub const BRACKET_2: f32 = 0.12; // 12%
-pub const BRACKET_3: f32 = 0.22; // 22%
-pub const BRACKET_4: f32 = 0.24; // 24%
-pub const BRACKET_5: f32 = 0.32; // 32%
-pub const BRACKET_6: f32 = 0.35; // 35%
-pub const BRACKET_7: f32 = 0.37; // 37%
+pub const TAX_BRACKET_1_RATE: f32 = 0.10; // 10%
+pub const TAX_BRACKET_2_RATE: f32 = 0.12; // 12%
+pub const TAX_BRACKET_3_RATE: f32 = 0.22; // 22%
+pub const TAX_BRACKET_4_RATE: f32 = 0.24; // 24%
+pub const TAX_BRACKET_5_RATE: f32 = 0.32; // 32%
+pub const TAX_BRACKET_6_RATE: f32 = 0.35; // 35%
+pub const TAX_BRACKET_7_RATE: f32 = 0.37; // 37%
 
 // 2026 tax brackets thresholds for single filers
 pub const SINGLE_BRACKET_1_THRESHOLD: f32 = 12400.00;
@@ -75,3 +75,5 @@ pub const HEAD_OF_HOUSEHOLD_BRACKET_4_THRESHOLD: f32 = 201750.00;
 pub const HEAD_OF_HOUSEHOLD_BRACKET_5_THRESHOLD: f32 = 256200.00;
 pub const HEAD_OF_HOUSEHOLD_BRACKET_6_THRESHOLD: f32 = 640600.00;
 pub const HEAD_OF_HOUSEHOLD_BRACKET_7_THRESHOLD: f32 = f32::MAX;
+
+// 2026 single filer tax bracket applied

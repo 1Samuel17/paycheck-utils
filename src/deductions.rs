@@ -6,9 +6,9 @@ pub enum PaycheckDeduction {
     Medical(Option<f32>), // health insurance (fixed amount)
     Dental(Option<f32>), // health insurance (fixed amount)
     Vision(Option<f32>), // health insurance (fixed amount)
-    Retirement401k(Option<f32>), // retirement (percentage)
+    Retirement401k(Option<f32>), // retirement (percentage) **PRETAX
     RetirementRoth401k(Option<f32>), // retirement (percentage)
-    HSA(Option<f32>), // health savings account (fixed amount)
+    HSA(Option<f32>), // health savings account (fixed amount) **PRETAX
     FSA(Option<f32>), // flexible spending account (fixed amount)
     VoluntaryADD(Option<f32>), // accidental death & dismemberment (fixed amount)
     VoluntaryLife(Option<f32>), // group life insurance (fixed amount)
