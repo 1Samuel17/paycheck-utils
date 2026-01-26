@@ -1,7 +1,5 @@
 // module for handling estimated federal paycheck withholdings using the method outlined by the IRS in Publication 15T (2026) (percentage method)
 
-use std::sync::BarrierWaitResult;
-
 use crate::utils::*;
 
 // 1. annualize paycheck

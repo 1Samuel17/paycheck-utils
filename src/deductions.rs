@@ -98,8 +98,6 @@ impl PostTaxDeductions {
 
 #[cfg(test)]
 mod tests {
-    use crate::deductions;
-
     use super::*;
     use PreTaxDeduction::*;
     use PostTaxDeduction::*;
