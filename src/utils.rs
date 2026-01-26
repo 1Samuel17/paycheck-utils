@@ -18,9 +18,9 @@ pub enum FilingStatus {
 
 // 2026 standard deductions (irs.gov)
 pub const SINGLE_DEDUCTION: f32 = 16100.00;
-// pub const HEAD_OF_HOUSEHOLD_DEDUCTION: f32 = 24150.00; // for future implementation
-// pub const MARRIED_FILING_JOINTLY_DEDUCTION: f32 = 32200.00; // for future implementation
-// pub const MARRIED_FILING_SEPERATE_DEDUCTION: f32 = 16100.00; // for future implementation
+pub const HEAD_OF_HOUSEHOLD_DEDUCTION: f32 = 24150.00; // for future implementation
+pub const MARRIED_FILING_JOINTLY_DEDUCTION: f32 = 32200.00; // for future implementation
+pub const MARRIED_FILING_SEPERATE_DEDUCTION: f32 = 16100.00; // for future implementation
 
 // 2026 payroll withholding constants
 pub const SOCIAL_SECURITY_RATE: f32 = 0.062; // percentage
