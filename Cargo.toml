@@ -4,5 +4,6 @@ version = "0.1.0"
 author = "Samuel Diaz"
 edition = "2024"
 description = "a library that contains utility functions for estimating paycheck withholdings and net income in order to compare against a given set of living expenses"
+license = "MIT License"
 
 [dependencies]
