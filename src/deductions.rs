@@ -7,7 +7,6 @@ pub enum PreTaxDeduction {
     Dental(Option<f32>),
     Vision(Option<f32>),
     Traditional401K(Option<f32>),
-    Roth401K(Option<f32>),
     HSA(Option<f32>),
     FSA(Option<f32>),
 }
@@ -59,7 +58,6 @@ impl PreTaxDeductions {
                 | PreTaxDeduction::Dental(amount)
                 | PreTaxDeduction::Vision(amount)
                 | PreTaxDeduction::Traditional401K(amount)
-                | PreTaxDeduction::Roth401K(amount)
                 | PreTaxDeduction::HSA(amount)
                 | PreTaxDeduction::FSA(amount) => acc + amount.unwrap_or(0.0),
             })
