@@ -38,6 +38,7 @@ pub use crate::withholdings::*;
 /// use paycheck_utils::PreTaxDeduction;
 /// use paycheck_utils::PostTaxDeductions;
 /// use paycheck_utils::PostTaxDeduction;
+/// use paycheck_utils::Expenses;
 ///
 /// let new_job_scenario = EmploymentScenario::new(
 ///     30.0, // hourly rate
@@ -49,7 +50,8 @@ pub use crate::withholdings::*;
 ///         PreTaxDeduction::Vision(Some(15.0)),
 ///         PreTaxDeduction::Traditional401K(Some(200.0)),
 ///     ]), // pre-tax deductions
-///     PostTaxDeductions::new(vec![PostTaxDeduction::Roth401K(Some(100.0))]) // post-tax deductions
+///     PostTaxDeductions::new(vec![PostTaxDeduction::Roth401K(Some(100.0))]), // post-tax deductions
+///     Expenses::new(vec![]) // expenses
 /// );
 /// ```
 pub struct EmploymentScenario {
@@ -98,6 +100,8 @@ impl EmploymentScenario {
     /// use paycheck_utils::EmploymentScenario;
     /// use paycheck_utils::PreTaxDeductions;
     /// use paycheck_utils::PostTaxDeductions;
+    /// use paycheck_utils::Expenses;
+    /// use paycheck_utils::Expense;
     ///
     /// let pretax_deductions = PreTaxDeductions::new(vec![
     ///     PreTaxDeduction::Medical(Some(100.0)),
@@ -176,7 +180,8 @@ impl EmploymentScenario {
     /// use paycheck_utils::EmploymentScenario;
     /// use paycheck_utils::PreTaxDeductions;
     /// use paycheck_utils::PostTaxDeductions;
-    /// use paycheck_utils::expenses::{Expense, Expenses};
+    /// use paycheck_utils::Expense;
+    /// use paycheck_utils::Expenses;
     ///
     /// let pretax_deductions = PreTaxDeductions::new(vec![
     ///     PreTaxDeduction::Medical(Some(100.0)),
