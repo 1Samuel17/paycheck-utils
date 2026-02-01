@@ -6,4 +6,9 @@ edition = "2024"
 description = "a library that contains utility functions for estimating paycheck withholdings and net income in order to compare against a given set of living expenses"
 license = "MIT"
 
+[[bin]]
+name = "check-paycheck"
+path = "src/main.rs"
+
 [dependencies]
+clap = "4.5.56"
