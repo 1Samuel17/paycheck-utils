@@ -1,9 +1,9 @@
 [package]
 name = "paycheck-utils"
 version = "0.1.2"
-author = "Samuel Diaz"
+authors = ["Samuel Diaz"]
 edition = "2024"
-description = "a library that contains utility functions for estimating paycheck withholdings and net income in order to compare against a given set of living expenses"
+description = "A library that contains utility functions for estimating paycheck withholdings and net income in order to compare against a given set of living expenses"
 license = "MIT"
 
 [[bin]]
@@ -11,4 +11,5 @@ name = "check-paycheck"
 path = "src/main.rs"
 
 [dependencies]
-clap = "4.5.56"
+anyhow = "1.0.100"
+clap = { version = "4.5.56", features = ["derive"] }
