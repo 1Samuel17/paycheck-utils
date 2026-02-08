@@ -2,8 +2,8 @@
 //! Uses IRS guidelines for the year 2026, focusing on single filer status.
 //! Future implementation plans exist for other filing statuses.
 
-use crate::income::round_2_decimals;
-use crate::utils::*;
+use crate::utils::round_2_decimals;
+use crate::constants::*;
 
 /// Estimate federal tax withholding for a single paycheck based on gross paycheck and filing status
 /// # Arguments

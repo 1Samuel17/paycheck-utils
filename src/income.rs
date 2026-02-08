@@ -1,7 +1,8 @@
 //! Module for handling paycheck income calculations for hourly paid employees
 //! This module calculates from a bi-weekly paycheck perspective to synthesize how an employee thinks about, views, and plans their income.
 
-use crate::utils::*;
+use crate::constants::*;
+use crate::utils::round_2_decimals;
 
 /// Determine gross bi-weekly paycheck based on hourly rate and hours worked per week
 /// # Arguments
@@ -38,25 +39,6 @@ pub fn determine_gross_paycheck(rate: f32, hours_per_week: f32) -> f32 {
         ((regular_hours * rate) + (overtime_hours * (rate * OVERTIME_MULTIPLIER))) * PAY_PERIOD;
 
     round_2_decimals(gross_paycheck)
-}
-
-/// Rounds a f32 value to 2 decimal places
-/// # Arguments
-/// * `value` - f32 value to be rounded
-/// # Returns
-/// * `f32` - rounded value to 2 decimal places
-/// # Example
-/// ```
-/// use paycheck_utils::income::round_2_decimals;
-///
-/// let rounded_value = round_2_decimals(123.4567);
-/// assert_eq!(rounded_value, 123.46);
-/// ```
-/// # Notes
-/// * Uses standard rounding rules
-///
-pub fn round_2_decimals(value: f32) -> f32 {
-    (value * 100.0).round() / 100.0
 }
 
 // UNIT TESTS FOR INCOME MODULE

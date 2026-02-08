@@ -11,23 +11,27 @@
 //! - `deductions`: Defines structures and functions for handling pre-tax and post-tax deductions.
 //! - `income`: Contains functions to calculate gross paycheck based on hourly wage and hours worked.
 //! - `expenses`: Defines structures and functions for managing monthly expenses.
-//! - `utils`: Contains tax and time related constants necessary for calculations.
+//! - `constants`: Contains tax and time related constants necessary for calculations.
+//! - `interaction`: Contains functions for interacting with the user to receive input for employment scenario.
+//! - `utils`: Contains utility functions for rounding and formatting output.
 //!
 //! A CLI will be implemented in a future version to allow a user to input their hourly wage, hours worked, filing status, deductions and expenses to see their estimated net paycheck and other relevant financial metrics.
 
 pub mod deductions;
 pub mod expenses;
 pub mod income;
-pub mod utils;
+pub mod constants;
 pub mod withholdings;
 pub mod interaction;
+pub mod utils;
 
 pub use crate::deductions::*;
 pub use crate::expenses::*;
 pub use crate::income::*;
-pub use crate::utils::*;
+pub use crate::constants::*;
 pub use crate::withholdings::*;
 pub use crate::interaction::*;
+pub use crate::utils::*;
 
 /// Represents an employment scenario with hourly rate, hours worked per week, filing status, and deductions.
 /// Possible deductions avaialable are defined in the `deductions` module.
@@ -80,7 +84,7 @@ impl EmploymentScenario {
 
     /// Calculates the net paycheck based on the employment scenario's parameters.
     /// The calculations consider gross income, pre-tax deductions, federal tax withholdings, Social Security, Medicare, and post-tax deductions.
-    /// The IRS defined constants used to make calculations (such as tax rates, thresholds and standard deductions) are defined in the `utils` module.
+    /// The IRS defined constants used to make calculations (such as tax rates, thresholds and standard deductions) are defined in the `constants` module.
     /// This IRS method and flow for calculating withholdings is based on the 2026 federal tax year guidelines and can be summarized as follows:
     ///    1. Calculate gross paycheck on hourly rate and hours worked.
     ///    2. Subtract pre-tax deductions from gross paycheck to get adjusted gross paycheck.

@@ -28,8 +28,11 @@ fn main() -> Result<()> {
         Commands::Start => { 
             
             // Start the interactive dialogue to receive user input for employment scenario, deductions, and expenses
-            println!("\nCHECK-PAYCHECK CLI TOOL:\n\
-            A CLI tool for estimating paycheck net income and withholdings in order to compare against a given set of living expenses.\n");
+            println!("\n{:-^100}"," CHECK-PAYCHECK CLI TOOL: ");
+
+            println!("\n{:^100}","A CLI tool for estimating paycheck net income and withholdings");
+            println!("{:^100}", "in order to compare against a given set of living expenses.");
+            println!("\n{:-^100}","-");
 
             get_user_input();
             

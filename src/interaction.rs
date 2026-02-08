@@ -8,10 +8,10 @@ use std::collections::HashMap;
 
 pub fn get_user_input() {
 
-    println!("Let's start by gathering some information.");
+    println!("\n{:^100}", "Let's start by gathering some information.");
 
     // get employment scenario input
-    println!("First, let's create an employment scenario.\n");
+    println!("\nFirst, let's create an employment scenario.\n");
     let scenario = create_scenario();
 
     //get expenses input
