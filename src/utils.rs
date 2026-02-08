@@ -20,7 +20,35 @@ pub fn round_2_decimals(value: f32) -> f32 {
     (value * 100.0).round() / 100.0
 }
 
-// pub fn center_100(text: &str) {
-//     // future implementation of center alignment and line wrapping for displaying
-//     ()
-// }
+use std::any::{Any, TypeId};
+use std::str::FromStr;
+
+pub fn check_converted_value<T: Any + FromStr>(result: &Result<T, T::Err>, expected_type: TypeId) -> bool {
+    match result {
+        Ok(value) => value.type_id() == expected_type,
+        Err(_) => false,
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_round_2_decimals() {
+        assert_eq!(round_2_decimals(123.4567), 123.46);
+        assert_eq!(round_2_decimals(123.451), 123.45);
+        assert_eq!(round_2_decimals(123.455), 123.46);
+        assert_eq!(round_2_decimals(123.454), 123.45);
+    }
+
+    #[test]
+    fn test_check_converted_value() {
+        let result_ok: Result<f32, _> = "123.45".parse::<f32>();
+        let result_err: Result<f32, _> = "abc".parse::<f32>();
+        assert!(check_converted_value(&result_ok, TypeId::of::<f32>()));
+        assert!(!check_converted_value(&result_err, TypeId::of::<f32>()));
+    }
+}
+
+
