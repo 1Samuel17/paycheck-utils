@@ -1,3 +1,11 @@
+//! This module handles all user interaction to gather the necessary information to create an employment scenario struct
+//! This includes functions for displaying prompts, receiving input, and showing results. The main function in this module is `get_user_input` which orchestrates the entire process of gathering information from the user and creating an employment scenario struct.
+//!
+//! The `get_user_input` function first prompts the user to create an employment scenario by calling the `create_scenario` function, which gathers information about the user's hourly rate and hours worked per week. Then it prompts the user to enter their living expenses by calling the `get_expenses` function, which gathers information about various expense categories. Finally, it prompts the user to enter their deductions by calling the `get_deductions` function, which gathers information about both pre-tax and post-tax deductions. After gathering all the necessary information, it confirms the inputs with the user and then converts the inputs into an employment scenario struct using the `convert_inputs_to_struct` function.
+//!
+//! The `create_scenario`, `get_expenses`, and `get_deductions` functions all follow a similar pattern of prompting the user for input, validating the input, and storing it in a HashMap. The `confirm_inputs` function is used to display the gathered information back to the user for confirmation before proceeding to create the employment scenario struct. The `convert_inputs_to_struct` function takes the gathered information from the HashMaps and constructs an `EmploymentScenario` struct with the appropriate fields populated based on the user's input.
+
+/// checks the converted value of the user input to ensure it can be parsed into the expected type (in this case, a float). If the conversion is successful, it returns true; otherwise, it returns false. This function is used in the input validation loops in the `create_scenario`, `get_expenses`, and `get_deductions` functions to ensure that the user enters valid numeric input for the various fields.
 use crate::utils::check_converted_value;
 use crate::{
     EmploymentScenario, Expense, Expenses, PostTaxDeduction, PostTaxDeductions, PreTaxDeduction,
@@ -6,11 +14,10 @@ use crate::{
 use std::any::TypeId;
 use std::collections::HashMap;
 use std::io;
-/// module for user interaction
-/// handles input and output with the user
-/// includes functions for displaying prompts, receiving input, and showing results
 use std::io::prelude::*;
 
+/// main function to orchestrate user input and create employment scenario struct
+/// This function will call the other functions in this module to gather information from the user and create an employment scenario struct based on that information. It will start by getting the payrate and hours worked per week.
 pub fn get_user_input() -> EmploymentScenario {
     println!(
         "\n{:^100}",
@@ -35,16 +42,12 @@ pub fn get_user_input() -> EmploymentScenario {
     );
     let deductions = get_deductions();
 
-    // // confirm inputs with user
-    // println!("\n{:^100}", "--- Great! Let's make sure everything looks correct. ---");
-    // confirm_inputs(&scenario, &expenses, &deductions);
-
-    // create employment scenario struct
+    // create employment scenario struct using the inputs received from the user
     convert_inputs_to_struct(scenario, expenses, deductions)
 }
 
+/// create scenario input by prompting the user for their hourly rate and hours worked per week. The input is cleaned and validated to ensure it can be converted to a float before storing it in a HashMap. The keys of the HashMap are "Rate" and "Hours" and the values are the user input for those fields.
 fn create_scenario() -> HashMap<String, String> {
-    // create holding variables
     let mut inputs: HashMap<String, String> = HashMap::new();
     let mut input = String::new();
     let employed = ["Rate", "Hours"];
@@ -74,6 +77,7 @@ fn create_scenario() -> HashMap<String, String> {
     inputs
 }
 
+/// prompt user for expenses input and return a HashMap of the inputs. Cleans the input and validates that it can be converted to a float before storing it in the HashMap. The keys of the HashMap are the expense categories and the values are the amounts entered by the user.
 fn get_expenses() -> HashMap<String, String> {
     let mut inputs: HashMap<String, String> = HashMap::new();
     let mut input = String::new();
@@ -117,6 +121,7 @@ fn get_expenses() -> HashMap<String, String> {
     inputs
 }
 
+/// prompt user for deductions input and return a HashMap of the inputs. Cleans the input and validates that it can be converted to a float before storing it in the HashMap. The keys of the HashMap are the deduction categories and the values are the amounts entered by the user. This function handles both pre-tax and post-tax deductions, prompting the user separately for each type of deduction.
 fn get_deductions() -> HashMap<String, String> {
     let mut inputs: HashMap<String, String> = HashMap::new();
     let mut input = String::new();
@@ -190,49 +195,7 @@ fn get_deductions() -> HashMap<String, String> {
     inputs
 }
 
-// fn confirm_inputs(
-//     scenario: &HashMap<String, String>,
-//     expenses: &HashMap<String, String>,
-//     deductions: &HashMap<String, String>,
-// ) {
-//     let mut input = String::new();
-
-//     println!("\nHere is the scenario we just created:\n");
-
-//     println!("EMPLOYMENT SCENARIO:\n");
-
-//     for (k, v) in scenario.iter() {
-//         println!("{}: {}", k, v);
-//     }
-
-//     println!("\nDoes this look good (y/n)?: {}", input);
-//     io::stdin().read_line(&mut input.trim().to_string()).unwrap_or_default();
-//     input.clear();
-
-//     println!("\nEXPENSES:\n");
-
-//     for (k,v) in expenses.iter() {
-//         println!("{}: {}", k, v);
-//     }
-
-//     println!("\nDoes this look good (y/n)?: {}", input);
-//     io::stdin().read_line(&mut input.trim().to_string()).unwrap_or_default();
-//     input.clear();
-
-//     println!("\nDEDUCTIONS:\n");
-
-//     for (k,v) in deductions.iter() {
-//         println!("{}: {}", k, v);
-//     }
-
-//     println!("\nDoes this look good (y/n)?: {}", input);
-//     io::stdin().read_line(&mut input.trim().to_string()).unwrap_or_default();
-//     input.clear();
-
-//     println!("\n{:^100}", "--- Great! Let's run the numbers! ---");
-
-// }
-
+/// This function takes the three HashMaps containing the user input for the employment scenario, expenses, and deductions, and converts them into an `EmploymentScenario` struct. It parses the string values from the HashMaps into the appropriate types (e.g., f32) and constructs the `EmploymentScenario` struct with the corresponding fields populated based on the user's input.
 pub fn convert_inputs_to_struct(
     sc: HashMap<String, String>,
     ex: HashMap<String, String>,

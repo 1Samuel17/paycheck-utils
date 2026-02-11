@@ -14,7 +14,14 @@
 //! - `constants`: Contains tax and time related constants necessary for calculations.
 //! - `interaction`: Contains functions for interacting with the user to receive input for employment scenario.
 //! - `utils`: Contains utility functions for rounding and formatting output.
-
+//!
+//! A CLI tool has been added to this project to allow users to interact with the library and input their own employment scenarios, deductions, and expenses to calculate their net paycheck and compare it to their monthly expenses. There is only 1 command that starts a user interaction flow to gather the necessary inputs and then outputs the calculated net paycheck and comparison of monthly expenses to monthly income.
+//!
+//! Run CLI: 'check-paycheck start' or 'cargo run -- start'
+//!
+//! (future updates, improvements, and functionality planned)
+//!
+//!
 pub mod constants;
 pub mod deductions;
 pub mod expenses;

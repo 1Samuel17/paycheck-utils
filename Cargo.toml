@@ -1,6 +1,6 @@
 [package]
 name = "paycheck-utils"
-version = "0.2.4"
+version = "0.2.5"
 authors = ["Samuel Diaz"]
 edition = "2024"
 description = "A CLI tool for estimating paycheck withholdings and net income. Can also be used as a library."
